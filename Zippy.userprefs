@@ -1,0 +1,22 @@
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="12/20/2014 5:32:37 AM">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Zippy/Controllers/FileListOutlineDataSource.cs">
+    <Files>
+      <File FileName="Zippy/MainWindowController.cs" Line="30" Column="30" />
+      <File FileName="Zippy/Globals.cs" Line="1" Column="1" />
+      <File FileName="Zippy/DirectoryStructure.cs" Line="42" Column="42" />
+      <File FileName="Zippy/Controllers/TableListDelegate.cs" Line="1" Column="1" />
+      <File FileName="Zippy/Controllers/TableListDataSource.cs" Line="1" Column="1" />
+      <File FileName="Zippy/Views/CustomTableView.cs" Line="28" Column="28" />
+      <File FileName="Zippy/Controllers/FileListOutlineDataSource.cs" Line="13" Column="13" />
+      <File FileName="Zippy/Main.cs" Line="1" Column="1" />
+      <File FileName="Zippy/MainWindow.designer.cs" Line="2" Column="2" />
+      <File FileName="Zippy/MainWindow.cs" Line="1" Column="1" />
+      <File FileName="Zippy/Controllers/FileListOutlineItem.cs" Line="15" Column="15" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
