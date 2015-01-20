@@ -13,45 +13,57 @@ namespace Zippy
 	partial class MainWindowController
 	{
 		[Outlet]
-		MonoMac.AppKit.NSTableCellView imageCell { get; set; }
-	
+		MonoMac.AppKit.NSTableCellView outlineImageCell { get; set; }
+
 		[Outlet]
 		Zippy.CustomOutlineView outlineView { get; set; }
 
 		[Outlet]
-		Zippy.CustomTableView tableView { get; set; }
+		MonoMac.AppKit.NSTableCellView tableImageCell { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTableCellView textCell { get; set; }
+		MonoMac.AppKit.NSTableCellView tableTextCell { get; set; }
+
+		[Outlet]
+		Zippy.CustomTableView tableView { get; set; }
+
+		[Action ("doubleAction:")]
+		partial void doubleAction (MonoMac.Foundation.NSObject sender);
 
 		[Action ("doubleClick:")]
 		partial void doubleClick (MonoMac.Foundation.NSObject sender);
+
+		[Action ("doubleClieck:")]
+		partial void doubleClieck (MonoMac.Foundation.NSObject sender);
+
+		[Action ("outlineViewSelectionDidChange:")]
+		partial void outlineViewSelectionDidChange (MonoMac.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (imageCell != null) {
-				imageCell.Dispose ();
-				imageCell = null;
+			if (outlineImageCell != null) {
+				outlineImageCell.Dispose ();
+				outlineImageCell = null;
 			}
 
 			if (outlineView != null) {
 				outlineView.Dispose ();
 				outlineView = null;
+			}
+
+			if (tableImageCell != null) {
+				tableImageCell.Dispose ();
+				tableImageCell = null;
+			}
+
+			if (tableTextCell != null) {
+				tableTextCell.Dispose ();
+				tableTextCell = null;
 			}
 
 			if (tableView != null) {
 				tableView.Dispose ();
 				tableView = null;
-			}
-
-			if (textCell != null) {
-				textCell.Dispose ();
-				textCell = null;
-			}
-
-			if (outlineView != null) {
-				outlineView.Dispose ();
-				outlineView = null;
 			}
 		}
 	}

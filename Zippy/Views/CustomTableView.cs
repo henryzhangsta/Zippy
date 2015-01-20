@@ -12,6 +12,7 @@ namespace Zippy
 	public partial class CustomTableView : NSTableView
 	{
 		public DecompressionHandler decomp;
+		private NSPasteboard dp;
 
 		public CustomTableView (IntPtr handle) : base (handle)
 		{

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
@@ -8,22 +9,23 @@ namespace Zippy
 	public class FileListOutlineDataSource : NSOutlineViewDataSource
 	{
 		FileListOutlineItem root;
+		FileListOutlineItem displayRoot;
 
 		public FileListOutlineDataSource() : base()
 		{
-			this.root = new FileListOutlineItem("", new DirectoryNode());
+			this.root = null;
 		}
 
-		public void SetData(DirectoryNode root)
+		public void SetData(string name, DirectoryNode root)
 		{
-			this.root = new FileListOutlineItem("", root);
+			this.root = new FileListOutlineItem(name, root);
 		}
 
 		public override int GetChildrenCount(NSOutlineView outlineView, NSObject item)
 		{
 			if (item == null)
 			{
-				return GetChildrenCount(outlineView, root);
+				return (this.root == null) ? 0 : 1;
 			}
 			return ((FileListOutlineItem)item).ChildCount();
 		}
@@ -37,17 +39,38 @@ namespace Zippy
 		{
 			if (item == null)
 			{
-				return GetChild(outlineView, childIndex, root);
+				return this.root;
 			}
 			return ((FileListOutlineItem)item).Children()[childIndex];
 		}
 
 		public override NSObject GetObjectValue(NSOutlineView outlineView, NSTableColumn tableColumn, NSObject item)
 		{
-			NSTableCellView c = new NSTableCellView();
-			c.TextField = new NSTextField();
-			c.TextField.StringValue = ((FileListOutlineItem)item).GetName();
+			NSString c = ((FileListOutlineItem)item).GetName();
 			return c;
+		}
+
+		public NSImage GetFileIcon(NSObject item)
+		{
+			return DisplayUtils.GetFileIcon(((FileListOutlineItem)item).GetName(), ((FileListOutlineItem)item).IsDirectory && item != root);
+		}
+
+		public NSObject GetNode(string[] path)
+		{
+			return root.GetNode(path.ToList());
+		}
+
+		public override bool OutlineViewwriteItemstoPasteboard(NSOutlineView outlineView, NSArray items, NSPasteboard pboard)
+		{
+			if (outlineView.SelectedRow < 0 || outlineView.SelectedRowCount <= 0)
+			{
+				return false;
+			}
+
+			pboard.DeclareTypes(new string[]{ NSPasteboard.NSFilesPromiseType }, this);
+			pboard.SetPropertyListForType(NSArray.FromStrings(new string[] {""}), NSPasteboard.NSFilesPromiseType);
+
+			return true;
 		}
 	}
 }

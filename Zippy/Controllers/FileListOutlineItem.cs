@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
-using SharpCompress.Common;
+using SharpCompress.Archive;
 
 namespace Zippy
 {
 	public class FileListOutlineItem : NSObject
 	{
 		DirectoryNode node;
-		IEntry entry;
+		IArchiveEntry entry;
 		string name;
 		List<FileListOutlineItem> children;
 
-		public FileListOutlineItem(IEntry entry)
+		public FileListOutlineItem(IArchiveEntry entry)
 		{
 			this.name = entry.FilePath.Split('/').Last();
 			this.entry = entry;
@@ -25,6 +25,14 @@ namespace Zippy
 		{
 			this.name = name;
 			this.node = node;
+		}
+
+		public bool IsDirectory
+		{
+			get
+			{
+				return this.entry == null;
+			}
 		}
 
 		private void BuildChildren()
@@ -56,6 +64,34 @@ namespace Zippy
 		public NSString GetName()
 		{
 			return new NSString(name);
+		}
+
+		public FileListOutlineItem GetNode(List<string> path)
+		{
+			BuildChildren();
+
+			if (path.Count > 0)
+			{
+				string next = path.First();
+				path.RemoveAt(0);
+
+				foreach (FileListOutlineItem child in children)
+				{
+					if (child.GetName() == next)
+					{
+						return child.GetNode(path);
+					}
+				}
+
+				throw new FieldAccessException();
+			}
+
+			return this;
+		}
+
+		public IArchiveEntry GetEntry()
+		{
+			return entry;
 		}
 	}
 }

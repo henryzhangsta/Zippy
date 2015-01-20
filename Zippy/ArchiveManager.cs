@@ -63,7 +63,7 @@ namespace Zippy
 			{
 				root = new DirectoryNode();
 
-				foreach (IEntry i in archive.Entries)
+				foreach (IArchiveEntry i in archive.Entries)
 				{
 					root.AddEntry(SplitPath(i.FilePath), i);
 				}
@@ -76,13 +76,13 @@ namespace Zippy
 			return root.GetDirectories(SplitPath(path));
 		}
 
-		public IEntry GetFile(string path)
+		public IArchiveEntry GetFile(string path)
 		{
 			LoadStructure();
 			return root.GetFile(SplitPath(path));
 		}
 
-		public List<IEntry> GetFiles(string path)
+		public List<IArchiveEntry> GetFiles(string path)
 		{
 			LoadStructure();
 			return root.GetFiles(SplitPath(path));
@@ -94,7 +94,7 @@ namespace Zippy
 			return root.GetLeafDirectories(SplitPath(path));
 		}
 
-		public List<KeyValuePair<string, IEntry>> GetLeafFiles(string path)
+		public List<KeyValuePair<string, IArchiveEntry>> GetLeafFiles(string path)
 		{
 			LoadStructure();
 			return root.GetLeafFiles(SplitPath(path));

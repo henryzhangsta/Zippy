@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using SharpCompress.Common;
+using SharpCompress.Archive;
 
 namespace Zippy
 {
 	public class DirectoryNode
 	{
-		Dictionary<string, IEntry> files;
+		Dictionary<string, IArchiveEntry> files;
 		Dictionary<string, DirectoryNode> directories;
-		IEntry node;
+		IArchiveEntry node;
 
 		public DirectoryNode()
 		{
-			files = new Dictionary<string, IEntry>();
+			files = new Dictionary<string, IArchiveEntry>();
 			directories = new Dictionary<string, DirectoryNode>();
 		}
 
-		public DirectoryNode(IEntry node) : this()
+		public DirectoryNode(IArchiveEntry node) : this()
 		{
 			this.node = node;
 		}
 
-		public void AddEntry(List<string> path, IEntry entry)
+		public void AddEntry(List<string> path, IArchiveEntry entry)
 		{
 			if (path.Count > 1)
 			{
@@ -53,7 +53,7 @@ namespace Zippy
 			}
 		}
 
-		public IEntry GetFile(List<string> path)
+		public IArchiveEntry GetFile(List<string> path)
 		{
 			if (path.Count > 1)
 			{
@@ -65,7 +65,7 @@ namespace Zippy
 			return files[path.First()];
 		}
 
-		public List<IEntry> GetFiles(List<string> path)
+		public List<IArchiveEntry> GetFiles(List<string> path)
 		{
 			if (path.Count > 0)
 			{
@@ -139,23 +139,23 @@ namespace Zippy
 			}
 		}
 
-		public List<KeyValuePair<string, IEntry>> GetLeafFiles()
+		public List<KeyValuePair<string, IArchiveEntry>> GetLeafFiles()
 		{
-			List<KeyValuePair<string, IEntry>> leaves = new List<KeyValuePair<string, IEntry>>();
-			foreach (KeyValuePair<string, IEntry> kv in files)
+			List<KeyValuePair<string, IArchiveEntry>> leaves = new List<KeyValuePair<string, IArchiveEntry>>();
+			foreach (KeyValuePair<string, IArchiveEntry> kv in files)
 			{
-				leaves.Add(new KeyValuePair<string, IEntry>(kv.Key, kv.Value));
+				leaves.Add(new KeyValuePair<string, IArchiveEntry>(kv.Key, kv.Value));
 			}
 
 			foreach (KeyValuePair<string, DirectoryNode> kv in directories)
 			{
-				leaves.AddRange(kv.Value.GetLeafFiles().Select((item) => new KeyValuePair<string, IEntry>(kv.Key + "/" + item.Key, item.Value)));
+				leaves.AddRange(kv.Value.GetLeafFiles().Select((item) => new KeyValuePair<string, IArchiveEntry>(kv.Key + "/" + item.Key, item.Value)));
 			}
 
 			return leaves;
 		}
 
-		public List<KeyValuePair<string, IEntry>> GetLeafFiles(List<string> path)
+		public List<KeyValuePair<string, IArchiveEntry>> GetLeafFiles(List<string> path)
 		{
 			if (path.Count > 0)
 			{

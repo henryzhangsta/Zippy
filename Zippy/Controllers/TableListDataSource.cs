@@ -71,7 +71,7 @@ namespace Zippy
 		public override bool WriteRows(NSTableView tableView, NSIndexSet rowIndexes, NSPasteboard pboard)
 		{
 			pboard.DeclareTypes(new string[]{ NSPasteboard.NSFilesPromiseType }, this);
-			NSArray a = NSArray.FromStrings(new string[]{ "pdf" });
+			NSArray a = NSArray.FromStrings(new string[]{ "" });
 			pboard.SetPropertyListForType(a, NSPasteboard.NSFilesPromiseType);
 
 			return true;

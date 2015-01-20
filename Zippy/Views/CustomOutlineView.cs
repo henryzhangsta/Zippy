@@ -12,5 +12,16 @@ namespace Zippy
 		public CustomOutlineView (IntPtr handle) : base (handle)
 		{
 		}
+
+		public override void AwakeFromNib()
+		{
+			base.AwakeFromNib();
+			SetDraggingSourceOperationMask(NSDragOperation.Copy, false);
+		}
+
+		public override string[] NamesOfPromisedFilesDroppedAtDestination(NSUrl dropDestination)
+		{
+			return null;
+		}
 	}
 }

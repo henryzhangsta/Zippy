@@ -19,12 +19,13 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
     <UseSGen>false</UseSGen>
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <EnablePackageSigning>false</EnablePackageSigning>
     <EnableCodeSigning>false</EnableCodeSigning>
     <CreatePackage>false</CreatePackage>
+    <Commandlineparameters>~/Downloads/Minecraft.jar</Commandlineparameters>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -76,6 +77,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Views\" />
     <Folder Include="Utils\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs" />
@@ -104,6 +106,10 @@
     </Compile>
     <Compile Include="Controllers\FileListOutlineDataSource.cs" />
     <Compile Include="Controllers\FileListOutlineItem.cs" />
+    <Compile Include="Controllers\FileListOutlineDelegate.cs" />
+    <Compile Include="Constants\ArchiveInfo.cs" />
+    <Compile Include="Utils\ArchiveUtils.cs" />
+    <Compile Include="Utils\Logging.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainWindow.xib" />

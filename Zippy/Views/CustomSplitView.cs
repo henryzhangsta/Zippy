@@ -16,7 +16,7 @@ namespace Zippy
 
 		public override float DividerThickness {
 			get {
-				return -1;
+				return 0;
 			}
 		}
 	}
